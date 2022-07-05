@@ -1,4 +1,4 @@
-// +build windows
+//go:build windows
 
 // windows系统代理配置
 package gosysproxy
@@ -94,7 +94,7 @@ func SetPAC(scriptLoc string) error {
 	param := newParam(2)
 	// 利用Golang数组地址空间连续模拟 malloc
 	options := []internetPreConnOption{
-		{dwOption: _INTERNET_PER_CONN_FLAGS, value: _PROXY_TYPE_AUTO_PROXY_URL | _PROXY_TYPE_DIRECT},
+		{dwOption: _INTERNET_PER_CONN_FLAGS, value: _PROXY_TYPE_AUTO_PROXY_URL | _PROXY_TYPE_AUTO_DETECT | _PROXY_TYPE_DIRECT},
 		{dwOption: _INTERNET_PER_CONN_AUTOCONFIG_URL, value: scriptLocAddr},
 	}
 	param.pOptions = uintptr(unsafe.Pointer(&options[0]))
